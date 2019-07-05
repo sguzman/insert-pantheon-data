@@ -1,6 +1,7 @@
 import atexit
 import json
 import psycopg2
+from typing import Optional
 
 
 def read_json() -> json:
@@ -24,8 +25,24 @@ def con() -> psycopg2:
 
 
 def insert_peep(conn: psycopg2, p: json) -> None:
+    lon: Optional[str] = p.get('LON')
+    lat: Optional[str] = p.get('LAT')
+
+    lon_float: Optional[float] = None
+    if lon is not None:
+        if len(lon) != 0:
+            lon_float = float(lon)
+
+    lat_float: Optional[float] = None
+    if lat is not None:
+        if len(lat) != 0:
+            lat_float = float(lat)
+
+    page_views: Optional[str] = p.get('PageViewsEnglish')
+    birth_state: Optional[str] = p.get('birthstate')
+
     sql_peep_insert: str = 'INSERT INTO misc.public.people (name, domain, countryCode, longitude, latitude, pageViewsEnglish, birthYear, birthState, occupation, en_curid, numLangs, birthCity, averageViews, totalPageViews, countryName, stdDevPageViews, countryCode3, pageViewsNonEnglish, dataset, l_star, gender, industry, hpi, continentName) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
-    data = [p['name'], p['domain'], p['countryCode'], float(p['LON']) if len(p['LON']) != 0 else None, float(p['LAT']) if len(p['LAT']) != 0 else None, p['PageViewsEnglish'], p['birthyear'], p['birthstate'], p['occupation'], p['en_curid'], p['numlangs'], p['birthcity'], p['AverageViews'], p['TotalPageViews'], p['countryName'], p['StdDevPageViews'], p['countryCode3'], p['PageViewsNonEnglish'], p['dataset'], p['L_star'], p['gender'], p['industry'], p['HPI'], p['continentName']]
+    data = [p['name'], p['domain'], p['countryCode'], lon_float, lat_float, page_views, p['birthyear'], birth_state, p['occupation'], p['en_curid'], p['numlangs'], p['birthcity'], p['AverageViews'], p['TotalPageViews'], p['countryName'], p['StdDevPageViews'], p['countryCode3'], p['PageViewsNonEnglish'], p['dataset'], p['L_star'], p['gender'], p['industry'], p['HPI'], p['continentName']]
     print('Inserting', data)
 
     cursor = conn.cursor()
