@@ -42,9 +42,14 @@ def insert_peep(conn: psycopg2, p: json) -> None:
     birth_state: Optional[str] = p.get('birthstate')
     birth_city: Optional[str] = p.get('birthcity')
     average_views: Optional[int] = p.get('AverageViews')
+    total_page_views: Optional[int] = p.get('TotalPageViews')
+    std_dev_page_views: Optional[int] = p.get('StdDevPageViews')
+    page_views_non_english: Optional[int] = p.get('PageViewsNonEnglish')
+    l_star: Optional[float] = p.get('L_star')
+    hpi: Optional[float] = p.get('HPI')
 
     sql_peep_insert: str = 'INSERT INTO misc.public.people (name, domain, countryCode, longitude, latitude, pageViewsEnglish, birthYear, birthState, occupation, en_curid, numLangs, birthCity, averageViews, totalPageViews, countryName, stdDevPageViews, countryCode3, pageViewsNonEnglish, dataset, l_star, gender, industry, hpi, continentName) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
-    data = [p['name'], p['domain'], p['countryCode'], lon_float, lat_float, page_views, p['birthyear'], birth_state, p['occupation'], p['en_curid'], p['numlangs'], birth_city, average_views, p['TotalPageViews'], p['countryName'], p['StdDevPageViews'], p['countryCode3'], p['PageViewsNonEnglish'], p['dataset'], p['L_star'], p['gender'], p['industry'], p['HPI'], p['continentName']]
+    data = [p['name'], p['domain'], p['countryCode'], lon_float, lat_float, page_views, p['birthyear'], birth_state, p['occupation'], p['en_curid'], p['numlangs'], birth_city, average_views, total_page_views, p['countryName'], std_dev_page_views, p['countryCode3'], page_views_non_english, p['dataset'], l_star, p['gender'], p['industry'], hpi, p['continentName']]
     print('Inserting', data)
 
     cursor = conn.cursor()
