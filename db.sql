@@ -1,5 +1,5 @@
 CREATE UNLOGGED TABLE people (
-    id int PRIMARY KEY,
+    id serial PRIMARY KEY,
     name text NOT NULL,
     domain text NOT NULL,
     countryCode text NOT NULL,
