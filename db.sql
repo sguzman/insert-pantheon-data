@@ -1,5 +1,6 @@
 CREATE UNLOGGED TABLE people (
-    name text PRIMARY KEY NOT NULL,
+    id int PRIMARY KEY,
+    name text NOT NULL,
     domain text NOT NULL,
     countryCode text NOT NULL,
     longitude float,
@@ -8,7 +9,7 @@ CREATE UNLOGGED TABLE people (
     birthYear smallint NOT NULL,
     birthState text NOT NULL,
     occupation text NOT NULL,
-    en_curid smallint NOT NULL,
+    en_curid int NOT NULL,
     numLangs smallint NOT NULL,
     birthCity text NOT NULL,
     averageViews float NOT NULL,
