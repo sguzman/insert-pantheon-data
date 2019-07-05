@@ -6,7 +6,7 @@ CREATE UNLOGGED TABLE people (
     longitude float,
     latitude float,
     pageViewsEnglish bigint NOT NULL,
-    birthYear smallint NOT NULL,
+    birthYear smallint,
     birthState text NOT NULL,
     occupation text NOT NULL,
     en_curid int NOT NULL,
