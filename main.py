@@ -11,6 +11,7 @@ def con() -> psycopg2:
         conn.close()
         print('Closing connection', conn)
 
+    atexit.register(clean_up)
     return conn
 
 
