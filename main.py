@@ -13,7 +13,7 @@ def read_json() -> json:
 
 def con() -> psycopg2:
     conn: psycopg2 = \
-        psycopg2.connect(user='salvadorguzman', password='', host='127.0.0.1', port='5432', database='personal')
+        psycopg2.connect(user='admin', password='', host='127.0.0.1', port='5432', database='misc')
 
     def clean_up() -> None:
         conn.close()
