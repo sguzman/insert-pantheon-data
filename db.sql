@@ -1,4 +1,26 @@
 CREATE UNLOGGED TABLE people (
-    id serial PRIMARY KEY,
-    
+    name text PRIMARY KEY,
+    domains text,
+    countryCode text,
+    longitude float,
+    latitude float,
+    pageViewsEnglish bigint,
+    birthYear smallint,
+    birthState text,
+    occupation text,
+    en_curid smallint,
+    numLangs smallint,
+    birthCity text,
+    averageViews float,
+    totalPageViews int,
+    countryName text,
+    stdDevPageViews float,
+    countryCode3 text,
+    pageViewsNonEnglish int,
+    dataset text,
+    l_star float,
+    gender text,
+    industry text,
+    hpi float,
+    continentName text
 );
